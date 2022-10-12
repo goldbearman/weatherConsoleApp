@@ -18,6 +18,7 @@ const url = `http://api.weatherstack.com/current?access_key=${myAPIKey}&query=${
     res.on('data', (chunk) => rowData += chunk)
     res.on('end', () => {
       parseData = JSON.parse(rowData)
+      console.log(parseData);
       if (!parseData.error) {
         console.log(`Запрашиваемые данные по городу: ${userInput}`)
         console.log(parseData);
