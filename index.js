@@ -1,13 +1,14 @@
 const http = require('http');
 const readline = require('readline');
+const config = require('./config/config')
 
-const myAPIKey = process.env.myAPIKey;
+// const myAPIKey = process.env.myAPIKey;
 
 const rl = readline.createInterface(process.stdin, process.stdout);
 
 rl.question(`Задайте город, чтобы посмотреть погоду \n`, (userInput) => {
 
-const url = `http://api.weatherstack.com/current?access_key=${myAPIKey}&query=${userInput}`;
+const url = `http://api.weatherstack.com/current?access_key=${config.myAPIKey}&query=${userInput}`;
 
   http.get(url, res => {
 
@@ -18,7 +19,7 @@ const url = `http://api.weatherstack.com/current?access_key=${myAPIKey}&query=${
     res.on('data', (chunk) => rowData += chunk)
     res.on('end', () => {
       parseData = JSON.parse(rowData)
-      console.log(parseData);
+      // console.log(parseData);
       if (!parseData.error) {
         console.log(`Запрашиваемые данные по городу: ${userInput}`)
         console.log(parseData);
